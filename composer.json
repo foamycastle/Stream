@@ -1,6 +1,6 @@
 {
-  "name": "foamycastle/streamfactory",
-  "description": "A stream wrapper factory",
+  "name": "foamycastle/stream",
+  "description": "streamWrapper base class",
   "minimum-stability": "dev",
   "license": "GPL-3.0-or-later",
   "authors": [
