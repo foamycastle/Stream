@@ -12,10 +12,16 @@ abstract class AbstractStream implements Stream
     protected string $wrapperName;
 
     /**
-     * The current read/write position of the stream
+     * The current read/write byte position of the stream
      * @var int
      */
     protected int $streamPosition=0;
+
+    /**
+     * The stream's length in bytes
+     * @var int
+     */
+    protected int $streamLength=0;
 
     /**
      * Indicates the ability to read from the stream
