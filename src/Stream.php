@@ -144,8 +144,8 @@ interface Stream
      * Write to stream.  This method is called in response to `fwrite()`. <b>Note:</b>
      * Remember to update the current position of the stream by number of bytes that were successfully written.
      * @param string $data Should be stored into the underlying stream. If there is not enough room in the underlying stream, store as much as possible.
-     * @return bool Should return the number of bytes that were successfully stored, or 0 if none could be stored.
+     * @return int|bool Should return the number of bytes that were successfully stored, or 0 if none could be stored.
      */
-     public function stream_write(string $data):bool;
+     public function stream_write(string $data):int|bool;
 
 }
