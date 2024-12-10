@@ -61,7 +61,7 @@ interface Stream
      * `STREAM_META_ACCESS`: The argument of the chmod() as int.<br>
      * @return bool Returns true on success or false on failure. If option is not implemented, false should be returned.
      */
-     public function stream_metadata(string $path, int $option, int $value): bool;
+     public function stream_metadata(string $path, int $option, mixed $value): bool;
 
     /**
      * Opens file or URL. This method is called immediately after the wrapper is initialized (f.e. by `fopen()` and `file_get_contents()`).
