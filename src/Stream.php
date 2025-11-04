@@ -10,6 +10,11 @@ use RuntimeException;
 abstract class Stream implements StreamInterface
 {
     /**
+     * A list of streams that may be accessed via their name
+     * @var array{string,static}
+     */
+    protected static array $repository;
+    /**
      * @var string
      */
     protected string $name;
@@ -48,6 +53,25 @@ abstract class Stream implements StreamInterface
      */
     protected array $readFilters;
 
+    public static function RegisterStream(string $name,Stream $stream)
+    {
+        self::$repository[$name] = $stream;
+    }
+    protected static function isRegisteredStream(string $name):bool
+    {
+        return isset(self::$repository[$name]);
+    }
+    protected static function getStream(string $name):?StreamInterface
+    {
+        return (self::$repository[$name] ?? null);
+    }
+    public static function __callStatic(string $name, array $arguments): ?StreamInterface
+    {
+        if(self::isRegisteredStream($name)){
+            return self::getStream($name);
+        }
+        return null;
+    }
 
     function size(): int
     {
