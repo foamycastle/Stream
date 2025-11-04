@@ -31,6 +31,7 @@ class ReadOnlyStream extends Stream
         stream_set_read_buffer($this->stream, 1024);
         stream_set_chunk_size($this->stream, 1024);
 
+        parent::registerStream($name,$this);
     }
 
     function attachFilter(string $name, string $filterClass, array $options=[]): StreamInterface

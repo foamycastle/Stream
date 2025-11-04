@@ -38,6 +38,7 @@ class ReadWriteStream extends Stream
         stream_set_read_buffer($this->stream, 4096);
         stream_set_chunk_size($this->stream, 4096);
 
+        parent::registerStream($name,$this);
     }
 
     function attachFilter(string $name, string $filterClass, array $options=[]): StreamInterface

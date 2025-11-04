@@ -30,6 +30,8 @@ class WriteOnlyStream extends Stream implements WriteFilterInterface
         stream_set_write_buffer($this->stream, 4096);
         stream_set_chunk_size($this->stream, 4096);
 
+        parent::registerStream($name,$this);
+
     }
 
     function attachFilter(string $name, string $filterClass, array $options=[]): StreamInterface
