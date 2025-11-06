@@ -14,7 +14,10 @@
   },
   "autoload": {
     "psr-4": {
-      "Foamycastle\\Stream\\": "src"
+      "Foamycastle\\": "src"
     }
+  },
+  "options": {
+    "disable-tls": true
   }
 }
