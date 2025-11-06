@@ -120,7 +120,7 @@ abstract class Stream implements StreamInterface
 
     function copyFrom($target): Stream
     {
-        // TODO: Implement copyFrom() method.
+        return $this;
     }
     public function __destruct()
     {
