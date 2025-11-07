@@ -8,7 +8,7 @@
 
 namespace Foamycastle;
 
-use Foamycastle\Stream;
+
 use Foamycastle\Support\Mode;
 use Foamycastle\Support\StreamState;
 use Foamycastle\Support\Support;
@@ -34,7 +34,7 @@ class WriteStream extends Stream
                 $this->state=StreamState::WRITE;
             }
         }
-        StreamManager::CreateStream("");
+        StreamManager::CreateStream($name,$path);
     }
 
     /**
