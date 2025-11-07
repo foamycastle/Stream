@@ -133,7 +133,11 @@ abstract class Stream implements StreamInterface
     }
     public static function Writable(Stream $stream):bool
     {
-        return $stream->state==StreamState::WRITE;
+        return $stream->state == StreamState::WRITE;
     }
 
+    public static function __callStatic(string $name, array $arguments)
+    {
+        // TODO: Implement __callStatic() method.
+    }
 }
