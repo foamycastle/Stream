@@ -20,20 +20,26 @@ class WriteStream extends Stream
      * Required in all descendants of Stream
      */
     public const DEFAULT_PATH='stdout';
-    public function __construct(string $path)
+    public function __construct($path)
     {
+
         $this->mode=Mode::WRITE;
-        $openAttempt=$this->open($path, $this->mode);
-        if(!is_null($openAttempt)){
-            $this->resource=$openAttempt;
+        if(is_resource($path)){
+            $this->resource=$path;
             $this->state=StreamState::WRITE;
+        }else{
+            $openAttempt=$this->open($path, $this->mode);
+            if(!is_null($openAttempt)){
+                $this->resource=$openAttempt;
+                $this->state=StreamState::WRITE;
+            }
         }
     }
 
     /**
      * @inheritDoc
      */
-    protected function open(string $path, Mode $mode=Mode::WRITE, array $options = [])
+    protected function open($path, Mode $mode=Mode::WRITE, array $options = [])
     {
          return
              @fopen($path, Mode::toString($mode), false,$options['context'] ?? null)

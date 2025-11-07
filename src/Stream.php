@@ -35,12 +35,12 @@ abstract class Stream implements StreamInterface
     }
     /**
      * Open a stream for operation
-     * @param string $path The path on which the stream will operate
+     * @param string|resource $path The path on which the stream will operate
      * @param Mode $mode The mode of operation
      * @param array{string,array{string,mixed}} $options
      * @return resource Returns the opened resource
      */
-    abstract protected function open(string $path, Mode $mode, array $options=[]);
+    abstract protected function open($path, Mode $mode, array $options=[]);
 
     /**
      * Close the underlying stream and restrict further operations
