@@ -22,7 +22,6 @@ class WriteStream extends Stream
     public const DEFAULT_PATH='stdout';
     public function __construct($path, string $name)
     {
-        StreamManager::Init();
         $this->mode=Mode::WRITE;
         if(is_resource($path)){
             $this->resource=$path;
@@ -34,7 +33,6 @@ class WriteStream extends Stream
                 $this->state=StreamState::WRITE;
             }
         }
-        StreamManager::CreateStream($name,$path);
     }
 
     /**
