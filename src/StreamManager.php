@@ -60,18 +60,26 @@ class StreamManager
 
     protected static function RegisterStream(string $name, Stream $stream):void
     {
-        if(isset(self::$streams[$name])) return;
+        if(!self::hasStream($name)) return;
         self::$streams[$name] = $stream;
     }
 
     protected static function UnregisterStream(string $name):void
     {
-        if(!isset(self::$streams[$name])) return;
+        if(!self::hasStream($name)) return;
         unset(self::$streams[$name]);
     }
     public static function __callStatic(string $name, array $arguments):?Stream
     {
-        if(!isset(self::$streams[$name])) return null;
+        if(!self::hasStream($name)) return null;
+        if(!empty($arguments) && is_string($arguments[0])){
+            return self::$streams[$name]->write($arguments[0]);
+        }
         return self::$streams[$name];
+    }
+
+    public static function hasStream(string $name):bool
+    {
+        return isset(self::$streams[$name]);
     }
 }

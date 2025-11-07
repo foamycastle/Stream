@@ -138,6 +138,8 @@ abstract class Stream implements StreamInterface
 
     public static function __callStatic(string $name, array $arguments)
     {
-        // TODO: Implement __callStatic() method.
+        if (StreamManager::hasStream($name)) {
+            return StreamManager::$name(...$arguments);
+        }
     }
 }
