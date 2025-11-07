@@ -124,7 +124,7 @@ abstract class Stream implements StreamInterface
     }
     public function __destruct()
     {
-        $this->close();
+        //$this->close();
     }
 
     public static function Readable(Stream $stream):bool
