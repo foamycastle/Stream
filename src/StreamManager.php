@@ -73,7 +73,8 @@ class StreamManager
     {
         if(!self::hasStream($name)) return null;
         if(!empty($arguments) && is_string($arguments[0])){
-            return self::$streams[$name]->write($arguments[0]);
+            self::$streams[$name]->write($arguments[0]);
+            return self::$streams[$name];
         }
         return self::$streams[$name];
     }
