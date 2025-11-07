@@ -60,7 +60,7 @@ class StreamManager
 
     protected static function RegisterStream(string $name, Stream $stream):void
     {
-        if(!self::hasStream($name)) return;
+        if(self::hasStream($name)) return;
         self::$streams[$name] = $stream;
     }
 

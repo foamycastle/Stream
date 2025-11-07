@@ -141,5 +141,6 @@ abstract class Stream implements StreamInterface
         if (StreamManager::hasStream($name)) {
             return StreamManager::$name(...$arguments);
         }
+        return null;
     }
 }
