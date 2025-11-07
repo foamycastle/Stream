@@ -64,38 +64,38 @@ function tod_diff(array $timeStart,array $timeEnd):int
 }
 function test__construct(string $path):bool
 {
-    $write = new WriteStream($path);
+    $write = new WriteStream($path,'name');
     return is_resource($write->getResource());
 }
 
 function testWrite(string $path, string $data):bool
 {
-    $write = new WriteStream($path);
+    $write = new WriteStream($path,'name');
     $len = $write->write($data);
     return $len==strlen($data);
 }
 function testRead(string $path):bool
 {
-    $read = new WriteStream($path);
+    $read = new WriteStream($path,'name');
     $attempt= $read->read();
     return (!Stream::Readable($read) && $attempt=='');
 }
 function testLength(string $path, string $data):bool
 {
-    $write = new WriteStream($path);
+    $write = new WriteStream($path,'name');
     $len = $write->write($data);
     return $len==$write->length();
 }
 function testSeekAndTell(string $path, string $data):bool
 {
-    $write = new WriteStream($path);
+    $write = new WriteStream($path,'name');
     $len = $write->write($data);
     return $write->seek(0, Whence::SET) && $write->tell()==0;
 }
 
 function testEOF(string $path, string $data): bool
 {
-    $write = new WriteStream($path);
+    $write = new WriteStream($path,'name');
     $len = $write->write($data);
     $write->seek(123456,Whence::SET);
     return !$write->eof();
@@ -106,7 +106,7 @@ function testGetMemLimit():bool
 }
 function testSeekOverMemLimit():bool
 {
-    $write = new WriteStream('php://memory');
+    $write = new WriteStream('php://memory','name');
     $write->write(random_bytes(1024));
     $expectTrue=$write->seek(1,Whence::SET);
     $expectFail=$write->seek(129*(1024*1024),Whence::SET);
