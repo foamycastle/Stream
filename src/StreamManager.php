@@ -10,6 +10,7 @@
 namespace Foamycastle;
 
 use Foamycastle\Util\Validator\Validator;
+use Foamycastle\Utilities\Str;
 use InvalidArgumentException;
 
 
@@ -72,8 +73,8 @@ class StreamManager
     public static function __callStatic(string $name, array $arguments):?Stream
     {
         if(!self::hasStream($name)) return null;
-        if(!empty($arguments) && is_string($arguments[0])){
-            self::$streams[$name]->write($arguments[0]);
+        if(!empty($arguments)){
+            self::$streams[$name]->write(Str::StringFrom($arguments[0]));
             return self::$streams[$name];
         }
         return self::$streams[$name];
