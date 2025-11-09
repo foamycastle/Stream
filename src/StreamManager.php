@@ -21,7 +21,7 @@ class StreamManager
      */
     private static array $streams = [];
     private static array $badWords = [
-        "STDOUT","STDIN","STDERROR",
+        "STDOUT","STDIN","STDERROR",'REPORT'
     ];
     public static function Init():void
     {
@@ -30,7 +30,12 @@ class StreamManager
             function($name){
                 if(
                     method_exists(StreamManager::class, $name) ||
-                    in_array($name,self::$badWords)
+                    in_array(
+                        strtoupper($name),
+                        array_map(
+                            'strtoupper',
+                            self::$badWords)
+                    )
                 ) return false;
                 return true;
             }
