@@ -9,10 +9,7 @@
 
 namespace Foamycastle;
 
-use Foamycastle\Util\Validator\Validator;
 use Foamycastle\Utilities\Str;
-use InvalidArgumentException;
-
 
 class StreamManager
 {
