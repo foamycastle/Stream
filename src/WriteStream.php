@@ -45,8 +45,4 @@ class WriteStream extends Stream
         return @fwrite($this->resource,$data,$len)==$len;
     }
 
-    function copyFrom($target): Stream
-    {
-        // TODO: Implement copyFrom() method.
-    }
 }

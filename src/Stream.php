@@ -15,6 +15,7 @@ use Foamycastle\Support\Whence;
 
 abstract class Stream implements StreamInterface
 {
+    protected const DEFAULT_PATH='';
     protected int $memLimit;
     protected string $path;
     protected Mode $mode;
@@ -74,6 +75,19 @@ abstract class Stream implements StreamInterface
     function eof(): bool
     {
         return @feof($this->resource);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    function copyFrom($target, string $newName): Stream
+    {
+        if (!is_resource($target) || !($target instanceof Stream)) {
+            throw new \InvalidArgumentException('Target must be a resource or an instance of Stream');
+        }
+        $newPath = @fopen($this->path, Mode::toString($this->mode));
+        stream_copy_to_stream($this->resource, $newPath);
+        return new static($newPath, $newName);
     }
 
     /**
@@ -196,4 +210,10 @@ abstract class Stream implements StreamInterface
         if ($bufferSize == 0) return false;
         return true;
     }
+
+    function getState(): StreamState
+    {
+        return $this->state;
+    }
+
 }

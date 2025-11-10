@@ -9,6 +9,7 @@
 namespace Foamycastle;
 
 use Foamycastle\Support\Mode;
+use Foamycastle\Support\StreamState;
 
 interface StreamInterface
 {
@@ -22,13 +23,13 @@ interface StreamInterface
      * Return the length of the streams buffer
      * @return mixed
      */
-    function length():int;
+    function length(): int;
 
     /**
      * Return the entire contents of the stream
      * @return string
      */
-    function getContents():string;
+    function getContents(): string;
 
     /**
      * Put the entire contents of `$string` in the stream
@@ -49,5 +50,12 @@ interface StreamInterface
      * @param $target
      * @return Stream
      */
-    function copyFrom($target):Stream;
+    function copyFrom($target, string $newName): Stream;
+
+    /**
+     * Allow external entities to read the stream's state
+     * @return StreamState
+     */
+    function getState(): StreamState;
+
 }
