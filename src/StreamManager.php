@@ -28,7 +28,7 @@ class StreamManager
     {
         spl_autoload_register(function ($class) use ($alias) {
             if (basename($class) === $alias) {
-                spl_autoload(self::class);
+                include __FILE__;
             }
         });
     }
