@@ -23,23 +23,14 @@ class StreamManager
     private static array $badWords = [
         "STDOUT","STDIN","STDERROR",'REPORT'
     ];
-    public static function Init():void
+
+    public static function Init(string $alias):void
     {
-        Validator::From(
-            'streamName',
-            function($name){
-                if(
-                    method_exists(StreamManager::class, $name) ||
-                    in_array(
-                        strtoupper($name),
-                        array_map(
-                            'strtoupper',
-                            self::$badWords)
-                    )
-                ) return false;
-                return true;
+        spl_autoload_register(function ($class) use ($alias) {
+            if (basename($class) === $alias) {
+                spl_autoload(self::class);
             }
-        );
+        });
     }
 
     /**
@@ -66,7 +57,6 @@ class StreamManager
 
     protected static function RegisterStream(string $name, Stream $stream):void
     {
-        if(self::hasStream($name)) return;
         self::$streams[$name] = $stream;
     }
 

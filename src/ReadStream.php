@@ -2,27 +2,22 @@
 /*
  *  Author: Aaron Sollman
  *  Email:  unclepong@gmail.com
- *  Date:   11/04/25
- *  Time:   12:06
+ *  Date:   11/10/25
+ *  Time:   10:42
 */
+
 
 namespace Foamycastle;
 
-
 use Foamycastle\Support\Mode;
 use Foamycastle\Support\StreamState;
-use Foamycastle\Support\Support;
 use Foamycastle\Support\Whence;
 
-class WriteStream extends Stream
+class ReadStream extends Stream
 {
-    /**
-     * Required in all descendants of Stream
-     */
-    public const DEFAULT_PATH='stdout';
     public function __construct($path, string $name)
     {
-        $this->mode=Mode::WRITE;
+        $this->mode = Mode::READ;
         if(is_resource($path)){
             $this->resource=$path;
             $this->state=StreamState::WRITE;
@@ -30,7 +25,7 @@ class WriteStream extends Stream
             $openAttempt=$this->open($path, $this->mode);
             if(!is_null($openAttempt)){
                 $this->resource=$openAttempt;
-                $this->state=StreamState::WRITE;
+                $this->state=StreamState::READ;
             }
         }
     }
@@ -38,11 +33,12 @@ class WriteStream extends Stream
     /**
      * @inheritDoc
      */
-    function write(string $data): bool
+    function read(int $length=-1, int $offset = 0): string
     {
-        if(!Stream::Writable($this)) return false;
-        $len=strlen($data);
-        return @fwrite($this->resource,$data,$len)==$len;
+        if(!Stream::Readable($this)) return '';
+        if($length==-1) $length = $this->length();
+        $this->seek($offset, Whence::SET);
+        return @fread($this->resource, $length) ?: "";
     }
 
     function copyFrom($target): Stream

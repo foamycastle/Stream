@@ -31,10 +31,18 @@ interface StreamInterface
     function getContents():string;
 
     /**
-     * Copy the contents of the stream to another
-     * @return resource
+     * Put the entire contents of `$string` in the stream
+     * @param string $contents
+     * @return bool
      */
-    function copy();
+    function putContents(string $contents): bool;
+
+    /**
+     * Copy the contents of the stream to another
+     * @param resource $target
+     * @return void
+     */
+    function copyTo($target): void;
 
     /**
      * Copy the contents of a stream into the current instance
