@@ -24,7 +24,7 @@ class StreamManager
         "STDOUT","STDIN","STDERROR",'REPORT'
     ];
 
-    public static function Init(string $alias):void
+    public static function Alias(string $alias):void
     {
         spl_autoload_register(function ($class) use ($alias) {
             if (basename($class) === $alias) {
