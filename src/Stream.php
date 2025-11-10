@@ -133,7 +133,7 @@ abstract class Stream implements StreamInterface
             ($this->mode == Mode::WRITE || $this->mode == Mode::READWRITE) &&
             (!$this->state == StreamState::CLOSED && !$this->state == StreamState::UNKNOWN)
         ) {
-            $this->seek(0,SEEK_SET);
+            $this->seek(0,Whence::SET);
             if(!$this->write($contents)) return false;
         }else{
             return false;
