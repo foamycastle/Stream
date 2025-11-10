@@ -24,15 +24,6 @@ class StreamManager
         "STDOUT","STDIN","STDERROR",'REPORT'
     ];
 
-    public static function Alias(string $alias):void
-    {
-        spl_autoload_register(function ($class) use ($alias) {
-            if (basename($class) === $alias) {
-                include __FILE__;
-            }
-        });
-    }
-
     /**
      * @param string $name
      * @param string|resource $path
@@ -43,6 +34,7 @@ class StreamManager
         $path
     ):void
     {
+        $name=Str::FilterNonAlpha($name);
         $stream = new WriteStream(STDOUT,$name);
         self::RegisterStream($name,$stream);
     }
