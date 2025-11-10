@@ -43,9 +43,6 @@ class StreamManager
         $path
     ):void
     {
-        if(!Validator::streamName($name)){
-            throw new InvalidArgumentException("Stream name '{$name}' is not a valid stream name");
-        }
         $stream = new WriteStream(STDOUT,$name);
         self::RegisterStream($name,$stream);
     }
