@@ -32,7 +32,7 @@ class StreamManager
     ):void
     {
         $name=Str::FilterNonAlpha($name);
-        $stream = new WriteStream(STDOUT,$name);
+        $stream = new WriteStream($path,$name);
         self::RegisterStream($name,$stream);
     }
 
