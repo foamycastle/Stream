@@ -12,12 +12,14 @@
   "keywords": [
     "streams","stream manager"
   ],
-  "version": "1.2.0",
+
   "require": {
     "php": "^8.1",
     "foamycastle/helper": "dev-master"
   },
-
+  "require-dev": {
+    "foamycastle/probar": "dev-master"
+  },
   "autoload": {
     "psr-4": {
       "Foamycastle\\": "src"
